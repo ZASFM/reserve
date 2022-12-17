@@ -23,6 +23,7 @@ const connect=async()=>{
 
 mongoose.connection.on('disconnected',()=>console.log('Disconnected from MDB'))
 //Middlewares:
+app.use(express.json());
 app.use('/api/auth',authRouter);
 app.use('/api/users',usersRouter);
 app.use('/api/hotels',hotelsRouter);
