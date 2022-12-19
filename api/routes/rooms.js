@@ -7,7 +7,7 @@ router.route('/:hotelId').post(verifyAdmin,createRoom);
 //update
 router.route('/:id').put(verifyAdmin,updateRoom)
 //delete
-router.route('/:id').delete(verifyAdmin,deleteRoom)
+router.route('/:id/:hotelId').delete(verifyAdmin,deleteRoom)
 //get
 router.route('/:id').get(getRoom)
 //getall
