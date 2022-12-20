@@ -6,6 +6,7 @@ import usersRouter from './routes/users.js';
 import hotelsRouter from './routes/hotels.js';
 import roomsRouter from './routes/rooms.js';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 
 const app=express();
 dotenv.config();
@@ -22,6 +23,7 @@ const connect=async()=>{
 
 mongoose.connection.on('disconnected',()=>console.log('Disconnected from MDB'))
 //Middlewares:
+app.use(cors());
 app.use(cookieParser());
 app.use(express.json());
 app.use('/api/auth',authRouter);
