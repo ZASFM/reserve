@@ -6,6 +6,7 @@ import { useState } from "react";
 import { format } from "date-fns";
 import { DateRange } from "react-date-range";
 import SearchItem from "../../components/searchItem/SearchItem";
+import useFetch from '../../hooks/useFetch';
 
 const List = () => {
   const location = useLocation();
@@ -13,6 +14,8 @@ const List = () => {
   const [date, setDate] = useState(location.state.date);
   const [openDate, setOpenDate] = useState(false);
   const [options, setOptions] = useState(location.state.options);
+
+  const {data,loading,error,reFetch}=useFetch(`http://localhost:5000/api/hotel?city=${destination}`);
 
   return (
     <div>
@@ -87,15 +90,16 @@ const List = () => {
             <button>Search</button>
           </div>
           <div className="listResult">
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
+             {loading?'Loading please wait':<>
+                {data.map((item=>{
+                  return (
+                    <SearchItem
+                       key={(item._id)}
+                       item={item}
+                    />
+                  )
+                }))}
+             </>}
           </div>
         </div>
       </div>

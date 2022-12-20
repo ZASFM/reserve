@@ -42,8 +42,10 @@ export const getHotel=async(req,res,next)=>{
 }
 
 export const getHotels=async(req,res,next)=>{
+   const {min,max,featured}=req.query;
    try{
-      const hotels=await Hotel.find();
+      //finding the hotel that is featured, has a max price lesser than max and has  amin price greater than min
+      const hotels=await Hotel.find({featured:featured,cheapestPrice:{$gt:min||1, $lt:max||999}});
       res.status(200).json({success: true,hotel:hotels});
    }
    catch(err){

@@ -1,6 +1,6 @@
 import "./searchItem.css";
 
-const SearchItem = () => {
+const SearchItem = ({item}) => {
   return (
     <div className="searchItem">
       <img
