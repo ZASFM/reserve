@@ -66,3 +66,15 @@ export const getRooms=async(req,res,next)=>{
       next(err)
    }
 }
+
+export const updateRoomAvailability=async(req,res,next)=>{
+   try{
+      await Room.updateOne({'roomNumber._id':req.params.id},{$push:{
+         'roomNumbers.$.unavailableDates':req.body.dates
+      }})
+      res.status(200).json({success: true});
+   }
+   catch(err){
+      next(err);
+   }
+}
